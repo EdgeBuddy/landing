@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import ClientLayout from './components/ClientLayout';
 import { StructuredData } from './components/seo/StructuredData';
@@ -108,6 +109,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StructuredData />
         <ClientLayout>{children}</ClientLayout>
+        <Analytics />
       </body>
     </html>
   );
