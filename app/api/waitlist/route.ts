@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
         });
         
         // Render React Email component to HTML
-        const emailHtml = render(WelcomeEmail({ email, position: position || 0 }));
+        const emailHtml = await render(WelcomeEmail({ email, position: position || 0 }));
         
         // Send email
         const info = await transporter.sendMail({
