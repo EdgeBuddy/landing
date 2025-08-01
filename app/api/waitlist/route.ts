@@ -12,8 +12,6 @@ import { WelcomeEmail } from '@/emails/WelcomeEmail';
 // Remove edge runtime to support React Email
 // export const runtime = 'edge';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const waitlistSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
 });
@@ -79,11 +77,21 @@ export async function POST(request: NextRequest) {
     // 1. Use subdomain like mail.edgebuddy.ai or notifications.edgebuddy.ai
     // 2. Contact Resend support to verify without MX records
     // 3. Keep using resend.dev if branding isn't critical
+    
+    // Debug logging
+    console.log('Email attempt starting...');
+    console.log('API Key exists:', !!process.env.RESEND_API_KEY);
+    console.log('API Key length:', process.env.RESEND_API_KEY?.length || 0);
+    console.log('API Key prefix:', process.env.RESEND_API_KEY?.substring(0, 10) || 'MISSING');
+    
     try {
       if (process.env.RESEND_API_KEY) {
         console.log('Attempting to send email via Resend...');
         console.log('From domain:', 'onboarding@resend.dev');
         console.log('To email:', email);
+        
+        // Initialize Resend client here, not at module level
+        const resend = new Resend(process.env.RESEND_API_KEY);
         
         const emailResult = await resend.emails.send({
           from: 'EdgeBuddy <onboarding@resend.dev>',
@@ -94,7 +102,8 @@ export async function POST(request: NextRequest) {
         
         console.log('Email sent successfully:', emailResult);
       } else {
-        console.log('RESEND_API_KEY not found in environment variables');
+        console.error('CRITICAL: RESEND_API_KEY not found in environment variables');
+        console.error('Environment keys available:', Object.keys(process.env).filter(k => k.includes('RESEND')));
       }
     } catch (emailError: any) {
       // Log detailed error information
