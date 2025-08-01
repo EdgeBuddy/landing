@@ -6,7 +6,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
+import { render } from '@react-email/render';
 import { WelcomeEmail } from '@/emails/WelcomeEmail';
 
 // Remove edge runtime to support React Email
@@ -71,69 +72,57 @@ export async function POST(request: NextRequest) {
       .from('waitlist')
       .select('*', { count: 'exact', head: true });
 
-    // Send welcome email
-    // NOTE: Using mail.edgebuddy.ai subdomain to avoid DNS conflicts with Zoho
-    // This subdomain is dedicated for transactional emails via Resend
-    // Regular email (hello@edgebuddy.ai) remains on Zoho
-    
-    // Debug logging
-    console.log('Email attempt starting...');
-    console.log('API Key exists:', !!process.env.RESEND_API_KEY);
-    console.log('API Key length:', process.env.RESEND_API_KEY?.length || 0);
-    console.log('API Key prefix:', process.env.RESEND_API_KEY?.substring(0, 10) || 'MISSING');
+    // Send welcome email using Zoho SMTP
+    // NOTE: Using existing Zoho email infrastructure instead of Resend
+    // This avoids DNS verification issues and uses our existing email setup
     
     try {
-      if (process.env.RESEND_API_KEY) {
-        console.log('Attempting to send email via Resend...');
-        console.log('From domain:', 'hello@mail.edgebuddy.ai');
-        console.log('To email:', email);
+      if (process.env.ZOHO_EMAIL && process.env.ZOHO_PASSWORD) {
+        console.log('Attempting to send email via Zoho SMTP...');
+        console.log('From:', process.env.ZOHO_EMAIL);
+        console.log('To:', email);
         
-        // Initialize Resend client here, not at module level
-        const resend = new Resend(process.env.RESEND_API_KEY);
-        
-        // Test with simple HTML first to isolate React Email issues
-        const emailResult = await resend.emails.send({
-          from: 'EdgeBuddy <hello@mail.edgebuddy.ai>',
-          to: email,
-          subject: 'Welcome to EdgeBuddy - You\'re on the list!',
-          html: `
-            <h1>Welcome to EdgeBuddy!</h1>
-            <p>Hi ${email},</p>
-            <p>You're #${position || 0} on the waitlist!</p>
-            <p>We'll notify you when we launch.</p>
-          `,
-          // react: WelcomeEmail({ email, position: position || 0 }),
+        // Create Zoho SMTP transporter
+        const transporter = nodemailer.createTransporter({
+          host: 'smtppro.zoho.eu', // Use .eu for European accounts
+          port: 465,
+          secure: true, // SSL
+          auth: {
+            user: process.env.ZOHO_EMAIL,
+            pass: process.env.ZOHO_PASSWORD,
+          },
         });
         
-        console.log('Email result:', JSON.stringify(emailResult, null, 2));
-        if (emailResult.error) {
-          console.error('Email failed:', emailResult.error);
-        } else {
-          console.log('Email sent with ID:', emailResult.data?.id);
-        }
+        // Render React Email component to HTML
+        const emailHtml = render(WelcomeEmail({ email, position: position || 0 }));
+        
+        // Send email
+        const info = await transporter.sendMail({
+          from: `EdgeBuddy <${process.env.ZOHO_EMAIL}>`,
+          to: email,
+          subject: 'Welcome to EdgeBuddy - You\'re on the list!',
+          html: emailHtml,
+        });
+        
+        console.log('Email sent successfully via Zoho:', info.messageId);
       } else {
-        console.error('CRITICAL: RESEND_API_KEY not found in environment variables');
-        console.error('Environment keys available:', Object.keys(process.env).filter(k => k.includes('RESEND')));
+        console.error('CRITICAL: ZOHO_EMAIL or ZOHO_PASSWORD not found in environment variables');
+        console.error('Available env vars:', Object.keys(process.env).filter(k => k.includes('ZOHO')));
       }
     } catch (emailError: any) {
-      // Log detailed error information
       console.error('CRITICAL EMAIL ERROR:', {
         message: emailError?.message,
-        name: emailError?.name,
-        statusCode: emailError?.statusCode,
+        code: emailError?.code,
         response: emailError?.response,
         stack: emailError?.stack,
       });
       
-      // Check for specific Resend errors
-      if (emailError?.statusCode === 403) {
-        console.error('Resend 403 Error: Domain not verified or API key invalid');
-      } else if (emailError?.statusCode === 401) {
-        console.error('Resend 401 Error: Invalid API key');
+      // Common Zoho SMTP errors
+      if (emailError?.code === 'EAUTH') {
+        console.error('Zoho Auth Error: Check email/password or enable app-specific password');
       }
       
-      // IMPORTANT: Don't swallow the error!
-      // For now, log but don't break signup flow
+      // Don't break signup flow
       console.error('Email failed but continuing with signup');
     }
 
