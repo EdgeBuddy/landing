@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase';
-import nodemailer from 'nodemailer';
+import { createTransport } from 'nodemailer';
 import { render } from '@react-email/render';
 import { WelcomeEmail } from '@/emails/WelcomeEmail';
 
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
         console.log('To:', email);
         
         // Create Zoho SMTP transporter
-        const transporter = nodemailer.createTransporter({
+        const transporter = createTransport({
           host: 'smtppro.zoho.eu', // Use .eu for European accounts
           port: 465,
           secure: true, // SSL
