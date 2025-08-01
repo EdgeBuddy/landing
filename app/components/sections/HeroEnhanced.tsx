@@ -83,7 +83,7 @@ export default function HeroEnhanced() {
         {/* Hero Copy */}
         <div className="mt-8 relative z-20">
           <motion.h1
-            className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -95,7 +95,7 @@ export default function HeroEnhanced() {
           </motion.h1>
 
           <motion.h2
-            className="text-2xl md:text-4xl font-light mb-8 text-gray-400"
+            className="text-xl sm:text-2xl md:text-4xl font-light mb-8 text-gray-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -109,7 +109,7 @@ export default function HeroEnhanced() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            <p className="text-3xl md:text-5xl font-bold text-emerald-400">
+            <p className="text-2xl sm:text-3xl md:text-5xl font-bold text-emerald-400">
               Until Now.
             </p>
           </motion.div>

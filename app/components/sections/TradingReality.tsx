@@ -37,12 +37,12 @@ export default function TradingReality() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             The <span className="text-red-400">Brutal Truth</span> About
             <br />
             Trading Without a Safety Net
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
             While you're alone with your charts, here's what's really happening:
           </p>
         </motion.div>

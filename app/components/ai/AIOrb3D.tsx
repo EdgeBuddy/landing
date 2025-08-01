@@ -227,14 +227,14 @@ export default function AIOrb3D() {
 
   if (!mounted) {
     return (
-      <div className="h-[400px] flex items-center justify-center">
+      <div className="h-[300px] sm:h-[400px] flex items-center justify-center">
         <div className="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-400/10 to-emerald-600/10" />
       </div>
     );
   }
 
   return (
-    <div className="h-[400px] relative flex items-center justify-center">
+    <div className="h-[300px] sm:h-[400px] relative flex items-center justify-center">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
         gl={{
