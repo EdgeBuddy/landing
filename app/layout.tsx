@@ -14,11 +14,11 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://edgebuddy.ai'),
   title: {
-    default: 'EdgeBuddy - AI Trading Risk Manager | Stop Trading Alone',
+    default: 'EdgeBuddy - Your Trading Companion | Stop Trading Alone',
     template: '%s | EdgeBuddy'
   },
   description:
-    'Professional traders have risk managers. You trade alone with your mistakes. Until now. EdgeBuddy is the AI trading companion that sees what you can\'t - your hidden biases, emotional patterns, and destructive loops.',
+    'Professional traders have risk managers. You trade alone with your mistakes. Until now. EdgeBuddy is the trading companion that sees what you can\'t - your hidden biases, emotional patterns, and destructive loops.',
   keywords: [
     'AI trading assistant',
     'trading risk management',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: 'EdgeBuddy - Your AI Trading Risk Manager',
+    title: 'EdgeBuddy - Your Trading Companion',
     description:
       'Professional traders have risk managers. You don\'t. EdgeBuddy is the AI that spots your blind spots, catches your emotional trades, and helps you trade like a pro.',
     url: 'https://edgebuddy.ai',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         url: '/api/og?title=Your%20AI%20Trading%20Risk%20Manager&subtitle=Professional%20traders%20have%20risk%20managers.%20Now%20you%20do%20too.',
         width: 1200,
         height: 630,
-        alt: 'EdgeBuddy - AI Trading Risk Manager',
+        alt: 'EdgeBuddy - Your Trading Companion',
       },
     ],
     locale: 'en_US',

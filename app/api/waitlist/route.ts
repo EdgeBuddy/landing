@@ -6,8 +6,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase';
+import { Resend } from 'resend';
+import { WelcomeEmail } from '@/emails/WelcomeEmail';
 
 export const runtime = 'edge';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const waitlistSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -61,6 +65,26 @@ export async function POST(request: NextRequest) {
         { message: 'Failed to join waitlist' },
         { status: 500 },
       );
+    }
+
+    // Get current position in waitlist
+    const { count: position } = await supabase
+      .from('waitlist')
+      .select('*', { count: 'exact', head: true });
+
+    // Send welcome email
+    try {
+      if (process.env.RESEND_API_KEY) {
+        await resend.emails.send({
+          from: 'EdgeBuddy <hello@edgebuddy.ai>',
+          to: email,
+          subject: 'Welcome to EdgeBuddy - You\'re on the list!',
+          react: WelcomeEmail({ email, position: position || 0 }),
+        });
+      }
+    } catch (emailError) {
+      // Don't fail the request if email fails
+      console.log('Email send failed:', emailError);
     }
 
     // Optional: Send to Discord webhook for real-time notifications
