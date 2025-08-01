@@ -72,11 +72,9 @@ export async function POST(request: NextRequest) {
       .select('*', { count: 'exact', head: true });
 
     // Send welcome email
-    // NOTE: Using resend.dev test domain to avoid DNS conflicts with Zoho
-    // Options for production:
-    // 1. Use subdomain like mail.edgebuddy.ai or notifications.edgebuddy.ai
-    // 2. Contact Resend support to verify without MX records
-    // 3. Keep using resend.dev if branding isn't critical
+    // NOTE: Using mail.edgebuddy.ai subdomain to avoid DNS conflicts with Zoho
+    // This subdomain is dedicated for transactional emails via Resend
+    // Regular email (hello@edgebuddy.ai) remains on Zoho
     
     // Debug logging
     console.log('Email attempt starting...');
@@ -94,7 +92,7 @@ export async function POST(request: NextRequest) {
         const resend = new Resend(process.env.RESEND_API_KEY);
         
         const emailResult = await resend.emails.send({
-          from: 'EdgeBuddy <onboarding@resend.dev>',
+          from: 'EdgeBuddy <hello@mail.edgebuddy.ai>',
           to: email,
           subject: 'Welcome to EdgeBuddy - You\'re on the list!',
           react: WelcomeEmail({ email, position: position || 0 }),
