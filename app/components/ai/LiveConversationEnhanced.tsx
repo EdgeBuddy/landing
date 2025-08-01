@@ -282,12 +282,12 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
             <p className="text-gray-400 mb-8">
               Ask me anything about your trading...
             </p>
-            <div className="flex flex-wrap gap-2 sm:gap-3 justify-center px-4 sm:px-0">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center sm:justify-center px-4 sm:px-0">
               {quickQuestions.map((question, index) => (
                 <motion.button
                   key={question}
                   onClick={() => setInput(question)}
-                  className="glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-emerald-500/10 hover:border-emerald-500/50 transition-all"
+                  className="glass w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-emerald-500/10 hover:border-emerald-500/50 transition-all"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
