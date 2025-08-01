@@ -65,7 +65,19 @@
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
    NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
+   
+   # Optional: Email notifications via Resend
+   RESEND_API_KEY=re_xxxxxxxxxx
+   
+   # Optional: Discord notifications
+   DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx
    ```
+   
+   **Note about Resend Email Setup:**
+   - Sign up at [resend.com](https://resend.com)
+   - Verify your domain (edgebuddy.ai) in Resend dashboard
+   - Get your API key from Resend dashboard
+   - If domain is not verified, emails will fail with 403 error
 
 3. **Deploy**
    - Click "Deploy"

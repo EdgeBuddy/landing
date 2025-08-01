@@ -74,18 +74,44 @@ export async function POST(request: NextRequest) {
       .select('*', { count: 'exact', head: true });
 
     // Send welcome email
+    // NOTE: Using resend.dev test domain to avoid DNS conflicts with Zoho
+    // Options for production:
+    // 1. Use subdomain like mail.edgebuddy.ai or notifications.edgebuddy.ai
+    // 2. Contact Resend support to verify without MX records
+    // 3. Keep using resend.dev if branding isn't critical
     try {
       if (process.env.RESEND_API_KEY) {
-        await resend.emails.send({
-          from: 'EdgeBuddy <hello@edgebuddy.ai>',
+        console.log('Attempting to send email via Resend...');
+        console.log('From domain:', 'onboarding@resend.dev');
+        console.log('To email:', email);
+        
+        const emailResult = await resend.emails.send({
+          from: 'EdgeBuddy <onboarding@resend.dev>',
           to: email,
           subject: 'Welcome to EdgeBuddy - You\'re on the list!',
           react: WelcomeEmail({ email, position: position || 0 }),
         });
+        
+        console.log('Email sent successfully:', emailResult);
+      } else {
+        console.log('RESEND_API_KEY not found in environment variables');
       }
-    } catch (emailError) {
-      // Don't fail the request if email fails
-      console.log('Email send failed:', emailError);
+    } catch (emailError: any) {
+      // Log detailed error information
+      console.error('Email send failed with error:', {
+        message: emailError?.message,
+        name: emailError?.name,
+        statusCode: emailError?.statusCode,
+        response: emailError?.response,
+        stack: emailError?.stack,
+      });
+      
+      // Check for specific Resend errors
+      if (emailError?.statusCode === 403) {
+        console.error('Resend 403 Error: Domain not verified or API key invalid');
+      } else if (emailError?.statusCode === 401) {
+        console.error('Resend 401 Error: Invalid API key');
+      }
     }
 
     // Optional: Send to Discord webhook for real-time notifications
