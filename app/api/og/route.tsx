@@ -5,6 +5,7 @@
 
 import { ImageResponse } from 'next/og';
 
+// Keep edge runtime for OG images (it's supported)
 export const runtime = 'edge';
 
 export async function GET(request: Request) {
