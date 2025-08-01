@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
     try {
       if (process.env.RESEND_API_KEY) {
         console.log('Attempting to send email via Resend...');
-        console.log('From domain:', 'onboarding@resend.dev');
+        console.log('From domain:', 'hello@mail.edgebuddy.ai');
         console.log('To email:', email);
         
         // Initialize Resend client here, not at module level
