@@ -91,21 +91,33 @@ export async function POST(request: NextRequest) {
         // Initialize Resend client here, not at module level
         const resend = new Resend(process.env.RESEND_API_KEY);
         
+        // Test with simple HTML first to isolate React Email issues
         const emailResult = await resend.emails.send({
           from: 'EdgeBuddy <hello@mail.edgebuddy.ai>',
           to: email,
           subject: 'Welcome to EdgeBuddy - You\'re on the list!',
-          react: WelcomeEmail({ email, position: position || 0 }),
+          html: `
+            <h1>Welcome to EdgeBuddy!</h1>
+            <p>Hi ${email},</p>
+            <p>You're #${position || 0} on the waitlist!</p>
+            <p>We'll notify you when we launch.</p>
+          `,
+          // react: WelcomeEmail({ email, position: position || 0 }),
         });
         
-        console.log('Email sent successfully:', emailResult);
+        console.log('Email result:', JSON.stringify(emailResult, null, 2));
+        if (emailResult.error) {
+          console.error('Email failed:', emailResult.error);
+        } else {
+          console.log('Email sent with ID:', emailResult.data?.id);
+        }
       } else {
         console.error('CRITICAL: RESEND_API_KEY not found in environment variables');
         console.error('Environment keys available:', Object.keys(process.env).filter(k => k.includes('RESEND')));
       }
     } catch (emailError: any) {
       // Log detailed error information
-      console.error('Email send failed with error:', {
+      console.error('CRITICAL EMAIL ERROR:', {
         message: emailError?.message,
         name: emailError?.name,
         statusCode: emailError?.statusCode,
@@ -119,6 +131,10 @@ export async function POST(request: NextRequest) {
       } else if (emailError?.statusCode === 401) {
         console.error('Resend 401 Error: Invalid API key');
       }
+      
+      // IMPORTANT: Don't swallow the error!
+      // For now, log but don't break signup flow
+      console.error('Email failed but continuing with signup');
     }
 
     // Optional: Send to Discord webhook for real-time notifications
