@@ -3,9 +3,9 @@
 // Reason: Shows understanding of trader isolation and need for companion
 // Related: page.tsx, ProblemAgitation.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function FounderStory() {
   return (

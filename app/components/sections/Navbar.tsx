@@ -3,14 +3,14 @@
 // Reason: Provides consistent navigation and primary action
 // Related: page.tsx, Hero.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import EdgeBuddyLogo from '../ui/EdgeBuddyLogo';
+import { motion } from "framer-motion";
+import EdgeBuddyLogo from "../ui/EdgeBuddyLogo";
 
 export default function Navbar() {
   const scrollToWaitlist = () => {
-    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

@@ -3,9 +3,9 @@
 // Reason: Helps visitors understand what makes EdgeBuddy unique
 // Related: page.tsx, ProblemAgitation.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
   Brain,
   MessageCircle,
@@ -13,44 +13,44 @@ import {
   BarChart3,
   Zap,
   Eye,
-} from 'lucide-react';
+} from "lucide-react";
 
 const features = [
   {
     icon: Brain,
-    title: 'Pattern Recognition',
+    title: "Pattern Recognition",
     description:
-      'EdgeBuddy identifies 12 behavioral patterns that destroy traders. Revenge trading, FOMO entries, capitulation exits - EdgeBuddy sees them all.',
+      "EdgeBuddy identifies 12 behavioral patterns that destroy traders. Revenge trading, FOMO entries, capitulation exits - EdgeBuddy sees them all.",
   },
   {
     icon: MessageCircle,
-    title: 'Conversational Coaching',
+    title: "Conversational Coaching",
     description:
-      'No more lonely charts. EdgeBuddy talks to you like a mentor, explaining what went wrong and exactly how to fix it.',
+      "No more lonely charts. EdgeBuddy talks to you like a mentor, explaining what went wrong and exactly how to fix it.",
   },
   {
     icon: TrendingUp,
-    title: 'Adaptive Learning',
+    title: "Adaptive Learning",
     description:
-      'EdgeBuddy learns your unique trading personality. The more you work together, the more personalized the guidance becomes.',
+      "EdgeBuddy learns your unique trading personality. The more you work together, the more personalized the guidance becomes.",
   },
   {
     icon: BarChart3,
-    title: 'Backend Stats Factory',
+    title: "Backend Stats Factory",
     description:
-      'EdgeBuddy digests more than 40 different stats of your trading performance and is ready to use them to help you understand what goes wrong.',
+      "EdgeBuddy digests more than 40 different stats of your trading performance and is ready to use them to help you understand what goes wrong.",
   },
   {
     icon: Zap,
-    title: 'Instant Insights',
+    title: "Instant Insights",
     description:
-      'No waiting for reports. EdgeBuddy analyzes your behavior in real-time and delivers insights when you need them most.',
+      "No waiting for reports. EdgeBuddy analyzes your behavior in real-time and delivers insights when you need them most.",
   },
   {
     icon: Eye,
-    title: 'Real-Time Monitoring',
+    title: "Real-Time Monitoring",
     description:
-      'EdgeBuddy watches every trade as it happens, alerting you to dangerous patterns before they cost you money.',
+      "EdgeBuddy watches every trade as it happens, alerting you to dangerous patterns before they cost you money.",
   },
 ];
 

@@ -3,25 +3,25 @@
 // Reason: Makes traders feel understood and creates urgency for solution
 // Related: page.tsx, FounderStory.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { TrendingDown, AlertTriangle, Brain, Users } from 'lucide-react';
+import { motion } from "framer-motion";
+import { TrendingDown, AlertTriangle, Brain, Users } from "lucide-react";
 
 export default function TradingReality() {
   const stats = [
     {
-      number: '95%',
-      label: 'of retail traders lose money',
+      number: "95%",
+      label: "of retail traders lose money",
       icon: TrendingDown,
     },
     {
-      number: '73%',
-      label: 'repeat the same mistakes daily',
+      number: "73%",
+      label: "repeat the same mistakes daily",
       icon: AlertTriangle,
     },
-    { number: '0', label: 'have a trading mentor', icon: Brain },
-    { number: '100%', label: 'of pros have risk managers', icon: Users },
+    { number: "0", label: "have a trading mentor", icon: Brain },
+    { number: "100%", label: "of pros have risk managers", icon: Users },
   ];
 
   return (

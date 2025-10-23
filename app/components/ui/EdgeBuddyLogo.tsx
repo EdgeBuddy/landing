@@ -1,25 +1,35 @@
-// File: /app/components/ui/EdgeBuddyLogo.tsx
+// File: /src/components/EdgeBuddyLogo.tsx
 // Purpose: Custom logo design combining E and B letters for EdgeBuddy
 // Reason: Creates a unique, professional brand identity
-// Related: Navbar.tsx, Footer.tsx
+// Related: Admin layout, Landing page
 
-'use client';
+"use client";
 
 interface LogoProps {
   className?: string;
   showText?: boolean;
+  size?: "sm" | "md" | "lg";
 }
 
 export default function EdgeBuddyLogo({
-  className = '',
+  className = "",
   showText = true,
+  size = "md",
 }: LogoProps) {
+  const sizes = {
+    sm: { icon: 32, text: "text-xl" },
+    md: { icon: 40, text: "text-2xl" },
+    lg: { icon: 48, text: "text-3xl" },
+  };
+
+  const currentSize = sizes[size];
+
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {/* Logo Mark - E and B combined */}
       <svg
-        width="40"
-        height="40"
+        width={currentSize.icon}
+        height={currentSize.icon}
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -63,9 +73,9 @@ export default function EdgeBuddyLogo({
 
       {/* Text */}
       {showText && (
-        <div className="flex items-baseline">
-          <span className="text-2xl font-bold text-white">Edge</span>
-          <span className="text-2xl font-bold text-emerald-400">Buddy</span>
+        <div className={`flex items-baseline ${currentSize.text}`}>
+          <span className="font-bold text-white">Edge</span>
+          <span className="font-bold text-emerald-400">Buddy</span>
         </div>
       )}
     </div>

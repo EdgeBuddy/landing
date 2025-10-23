@@ -3,10 +3,10 @@
 // Reason: Shows visitors why existing solutions fail them
 // Related: page.tsx, Features.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { XCircle, CheckCircle } from 'lucide-react';
+import { motion } from "framer-motion";
+import { XCircle, CheckCircle } from "lucide-react";
 
 export default function ProblemAgitation() {
   return (
@@ -19,9 +19,10 @@ export default function ProblemAgitation() {
           className="text-center mb-16"
         >
           <h3 className="text-4xl font-bold mb-4">
-            Traditional Tools Show You{' '}
+            Traditional Tools Show You{" "}
             <span className="text-gray-500">What Happened</span>
-            <br />EdgeBuddy Shows You{' '}
+            <br />
+            EdgeBuddy Shows You{" "}
             <span className="text-emerald-400">Why It Keeps Happening</span>
           </h3>
         </motion.div>

@@ -3,14 +3,14 @@
 // Reason: Creates an unforgettable first impression that sets EdgeBuddy apart
 // Related: AIOrb3D.tsx, page.tsx
 
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
 
 // Dynamic import to avoid SSR issues
-const AIOrb3D = dynamic(() => import('../ai/AIOrb3D'), {
+const AIOrb3D = dynamic(() => import("../ai/AIOrb3D"), {
   ssr: false,
   loading: () => (
     <div className="h-[400px] flex items-center justify-center">
@@ -34,23 +34,23 @@ export default function HeroEnhanced() {
   }, []);
 
   const createFloatingParticles = () => {
-    const particlesContainer = document.querySelector('.particles-container');
+    const particlesContainer = document.querySelector(".particles-container");
     if (!particlesContainer) return;
 
     for (let i = 0; i < 30; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.animationDelay = Math.random() * 10 + 's';
-      particle.style.animationDuration = 10 + Math.random() * 10 + 's';
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      particle.style.left = Math.random() * 100 + "%";
+      particle.style.animationDelay = Math.random() * 10 + "s";
+      particle.style.animationDuration = 10 + Math.random() * 10 + "s";
       particlesContainer.appendChild(particle);
     }
   };
 
   const handleScrollToDemo = () => {
-    document.querySelector('#demo-section')?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+    document.querySelector("#demo-section")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
   };
 
@@ -75,7 +75,7 @@ export default function HeroEnhanced() {
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <AIOrb3D />
         </motion.div>
@@ -129,7 +129,8 @@ export default function HeroEnhanced() {
                   Hidden Analytics
                 </div>
                 <p className="text-gray-500 text-xs">
-                  Transforms overwhelming data into simple "this is why you lost" explanations
+                  Transforms overwhelming data into simple "this is why you
+                  lost" explanations
                 </p>
               </div>
               <div className="p-4 rounded-lg border border-gray-800/50 hover:border-emerald-900/30 transition-colors">

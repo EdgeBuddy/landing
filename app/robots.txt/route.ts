@@ -3,11 +3,9 @@
 // Reason: Helps search engines understand how to crawl the site
 // Related: sitemap.xml/route.ts, layout.tsx
 
-import { MetadataRoute } from 'next';
-
 export function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://edgebuddy.ai';
-  
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://edgebuddy.ai";
+
   const robotsTxt = `User-agent: *
 Allow: /
 Disallow: /api/
@@ -31,7 +29,7 @@ Disallow: /`;
 
   return new Response(robotsTxt, {
     headers: {
-      'Content-Type': 'text/plain',
+      "Content-Type": "text/plain",
     },
   });
 }

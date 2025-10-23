@@ -3,10 +3,10 @@
 // Reason: Allows us to use client components in the root layout
 // Related: layout.tsx, CustomCursor.tsx
 
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import CustomCursor from './ui/CustomCursor';
+import { useEffect } from "react";
+import CustomCursor from "./ui/CustomCursor";
 
 export default function ClientLayout({
   children,
@@ -18,8 +18,8 @@ export default function ClientLayout({
     window.scrollTo(0, 0);
 
     // Disable scroll restoration
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
     }
   }, []);
 

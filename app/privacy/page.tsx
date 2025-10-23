@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 // File: /app/privacy/page.tsx
 // Purpose: Privacy policy page
 // Reason: Legal requirement for data collection
 // Related: tos/page.tsx, Footer.tsx
 
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function PrivacyPolicy() {
   return (
@@ -123,7 +123,7 @@ export default function PrivacyPolicy() {
               at:
             </p>
             <p className="mt-2">
-              Email:{' '}
+              Email:{" "}
               <a
                 href="mailto:support@edgebuddy.ai"
                 className="text-emerald-400 hover:underline"

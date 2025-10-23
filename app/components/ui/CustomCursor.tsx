@@ -3,10 +3,10 @@
 // Reason: Creates a consistent cursor experience across the site
 // Related: layout.tsx, all pages
 
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function CustomCursor() {
   const pathname = usePathname();
@@ -15,7 +15,7 @@ export default function CustomCursor() {
 
   // Check if we're on a utility page
   const isUtilityPage =
-    pathname.includes('/privacy') || pathname.includes('/tos');
+    pathname.includes("/privacy") || pathname.includes("/tos");
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -23,13 +23,13 @@ export default function CustomCursor() {
 
     // Set initial styles based on page type
     if (isUtilityPage) {
-      cursor.classList.add('cursor-utility');
+      cursor.classList.add("cursor-utility");
     } else {
-      cursor.classList.remove('cursor-utility');
+      cursor.classList.remove("cursor-utility");
     }
 
     // Show cursor immediately
-    cursor.style.opacity = '1';
+    cursor.style.opacity = "1";
 
     // Simple mouse move handler - no delays, no magnetic effects
     const handleMouseMove = (e: MouseEvent) => {
@@ -47,67 +47,67 @@ export default function CustomCursor() {
       const target = e.target as HTMLElement;
 
       if (target.matches('a, button, [role="button"]')) {
-        cursor.classList.add('cursor-hover');
-      } else if (target.matches('input, textarea')) {
-        cursor.classList.add('cursor-text');
+        cursor.classList.add("cursor-hover");
+      } else if (target.matches("input, textarea")) {
+        cursor.classList.add("cursor-text");
       }
     };
 
     const handleMouseOut = () => {
-      cursor.classList.remove('cursor-hover', 'cursor-text');
+      cursor.classList.remove("cursor-hover", "cursor-text");
     };
 
     // Click animation
     const handleMouseDown = () => {
-      cursor.classList.add('cursor-click');
+      cursor.classList.add("cursor-click");
     };
 
     const handleMouseUp = () => {
-      cursor.classList.remove('cursor-click');
+      cursor.classList.remove("cursor-click");
     };
 
     // Show/hide cursor
     const handleMouseEnter = () => {
-      cursor.style.opacity = '1';
+      cursor.style.opacity = "1";
     };
 
     const handleMouseLeave = () => {
-      cursor.style.opacity = '0';
+      cursor.style.opacity = "0";
     };
 
     // Add listeners
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     // Hide on touch devices
-    if ('ontouchstart' in window) {
-      cursor.style.display = 'none';
+    if ("ontouchstart" in window) {
+      cursor.style.display = "none";
     }
 
     // Cleanup
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseout', handleMouseOut);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [isUtilityPage]);
 
   return (
     <div
       ref={cursorRef}
-      className={`cursor ${isUtilityPage ? 'cursor-utility' : ''}`}
+      className={`cursor ${isUtilityPage ? "cursor-utility" : ""}`}
       style={{
         opacity: 0,
-        transition: 'opacity 0.3s',
+        transition: "opacity 0.3s",
       }}
     />
   );

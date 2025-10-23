@@ -3,38 +3,38 @@
 // Reason: Helps visitors visualize their transformation with EdgeBuddy
 // Related: page.tsx, Hero.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const timeline = [
   {
-    day: 'Day 1',
-    title: 'Calculation of your Stats',
+    day: "Day 1",
+    title: "Calculation of your Stats",
     description:
       "I've analyzed your last 500 trades. You have 3 critical flaws costing you $2,000/month. Want to see them?",
-    color: 'bg-emerald-500',
+    color: "bg-emerald-500",
   },
   {
-    day: 'Day 7',
-    title: 'Behavioral Adjustments Begin',
+    day: "Day 7",
+    title: "Behavioral Adjustments Begin",
     description:
       "I noticed possible revenge trading pattern. Remember what we discussed? Maybe take a 5-minute break first?",
-    color: 'bg-emerald-500/80',
+    color: "bg-emerald-500/80",
   },
   {
-    day: 'Day 30',
-    title: 'Measurable Improvements',
+    day: "Day 30",
+    title: "Measurable Improvements",
     description:
       "Your revenge trading is down 80%. You've saved $1,600 this month by avoiding destructive past traits.",
-    color: 'bg-emerald-500/60',
+    color: "bg-emerald-500/60",
   },
   {
-    day: 'Day 90',
-    title: 'Consistent Profitability',
+    day: "Day 90",
+    title: "Consistent Profitability",
     description:
       "You're now profitable 3 months straight. Your edge is real. Let's scale up safely.",
-    color: 'bg-emerald-500/40',
+    color: "bg-emerald-500/40",
   },
 ];
 

@@ -3,35 +3,35 @@
 // Reason: Builds trust by being transparent about being pre-launch
 // Related: page.tsx, Footer.tsx
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Rocket, Users, Code, Shield } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Rocket, Users, Code, Shield } from "lucide-react";
 
 const milestones = [
   {
     icon: Code,
-    title: 'In Active Development',
+    title: "In Active Development",
     description:
-      'Our core AI engine is being refined with advanced pattern recognition algorithms',
+      "Our core AI engine is being refined with advanced pattern recognition algorithms",
   },
   {
     icon: Shield,
-    title: 'Security First',
+    title: "Security First",
     description:
-      'Building bank-level encryption for your trading data and API keys',
+      "Building bank-level encryption for your trading data and API keys",
   },
   {
     icon: Users,
-    title: 'Private Beta Soon',
+    title: "Private Beta Soon",
     description:
-      'Limited spots for early adopters who want to shape the product',
+      "Limited spots for early adopters who want to shape the product",
   },
   {
     icon: Rocket,
-    title: 'Launch Q3 2025',
+    title: "Launch Q3 2025",
     description:
-      'Join the waitlist to be the first to know when EdgeBuddy is ready to become your trading companion',
+      "Join the waitlist to be the first to know when EdgeBuddy is ready to become your trading companion",
   },
 ];
 

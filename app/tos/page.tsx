@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 // File: /app/tos/page.tsx
 // Purpose: Terms of Service page
 // Reason: Legal requirement for service operation
 // Related: privacy/page.tsx, Footer.tsx
 
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function TermsOfService() {
   return (
@@ -127,7 +127,7 @@ export default function TermsOfService() {
             </h2>
             <p>For questions about these Terms, contact us at:</p>
             <p className="mt-2">
-              Email:{' '}
+              Email:{" "}
               <a
                 href="mailto:support@edgebuddy.ai"
                 className="text-emerald-400 hover:underline"

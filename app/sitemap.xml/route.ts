@@ -4,7 +4,7 @@
 // Related: robots.txt/route.ts, layout.tsx
 
 export function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://edgebuddy.ai';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://edgebuddy.ai";
   const currentDate = new Date().toISOString();
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -35,8 +35,8 @@ export function GET() {
 
   return new Response(sitemap, {
     headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate',
+      "Content-Type": "application/xml",
+      "Cache-Control": "public, s-maxage=86400, stale-while-revalidate",
     },
   });
 }

@@ -3,19 +3,19 @@
 // Reason: Creates an unforgettable first impression of EdgeBuddy's AI consciousness
 // Related: Hero.tsx, ThreeBackground.tsx
 
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Sphere,
   Float,
   MeshDistortMaterial,
   Trail,
   Text,
-} from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
+} from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 // Animated orb component
 function AnimatedOrb({ mouse }: { mouse: THREE.Vector2 }) {
@@ -57,7 +57,7 @@ function AnimatedOrb({ mouse }: { mouse: THREE.Vector2 }) {
         >
           <Sphere args={[1, 32, 32]}>
             <MeshDistortMaterial
-              color={hovered ? '#34d399' : '#10b981'}
+              color={hovered ? "#34d399" : "#10b981"}
               emissive="#059669"
               emissiveIntensity={0.2}
               roughness={0.3}
@@ -136,10 +136,10 @@ function ParticleField() {
 // Floating thoughts
 function FloatingThoughts() {
   const thoughts = [
-    { text: 'Analyzing patterns...', position: [-4, 2, -2] },
-    { text: 'Euphoria trading identified', position: [4, 1, -2] },
-    { text: 'Revenge trading identified', position: [-3, -2, -2] },
-    { text: 'Calculating your stats...', position: [3, -1.5, -2] },
+    { text: "Analyzing patterns...", position: [-4, 2, -2] },
+    { text: "Euphoria trading identified", position: [4, 1, -2] },
+    { text: "Revenge trading identified", position: [-3, -2, -2] },
+    { text: "Calculating your stats...", position: [3, -1.5, -2] },
   ];
 
   return (
@@ -179,8 +179,8 @@ function Scene() {
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   useFrame(() => {

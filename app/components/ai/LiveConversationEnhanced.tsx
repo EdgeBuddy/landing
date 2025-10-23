@@ -3,25 +3,25 @@
 // Reason: Demonstrates EdgeBuddy's conversational AI in a stunning interface
 // Related: AIOrb3D.tsx, page.tsx
 
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
-import { Send, Sparkles, Brain, TrendingUp, AlertTriangle } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { Send, Sparkles, Brain, TrendingUp, AlertTriangle } from "lucide-react";
 
 interface Message {
   id: string;
-  role: 'user' | 'ai';
+  role: "user" | "ai";
   content: string;
-  emotion?: 'neutral' | 'concerned' | 'encouraging' | 'warning';
+  emotion?: "neutral" | "concerned" | "encouraging" | "warning";
   insights?: string[];
 }
 
 const aiResponses: Record<
   string,
-  { content: string; emotion: Message['emotion']; insights?: string[] }
+  { content: string; emotion: Message["emotion"]; insights?: string[] }
 > = {
-  'Why do I keep losing money?': {
+  "Why do I keep losing money?": {
     content: `I've been watching patterns across thousands of traders, and here's what I see:
 
 • **Revenge Trading**: After a loss, you double down trying to "get even" - this amplifies losses
@@ -32,14 +32,14 @@ const aiResponses: Record<
 The truth? You're not trading the market. You're trading your emotions.
 
 Let me show you exactly where your edge is hiding...`,
-    emotion: 'concerned',
+    emotion: "concerned",
     insights: [
-      'Pattern: 73% of losses occur after 2PM',
-      'Risk: Position sizing increases 2.3x after losses',
+      "Pattern: 73% of losses occur after 2PM",
+      "Risk: Position sizing increases 2.3x after losses",
     ],
   },
 
-  'How can you help me?': {
+  "How can you help me?": {
     content: `Think of me as your trading consciousness - always watching, always learning, always there.
 
 **Real-Time Monitoring**
@@ -55,14 +55,14 @@ Not just "you lost $500" but "you revenge traded because you felt frustrated aft
 The more we work together, the better I understand your unique trading personality.
 
 I don't just track trades. I understand traders.`,
-    emotion: 'encouraging',
+    emotion: "encouraging",
     insights: [
-      'Capability: 12 behavioral patterns tracked',
-      'Learning: Adapts to your personality in 7 days',
+      "Capability: 12 behavioral patterns tracked",
+      "Learning: Adapts to your personality in 7 days",
     ],
   },
 
-  'What makes you different?': {
+  "What makes you different?": {
     content: `Every other tool shows you WHAT happened. EdgeBuddy shows you WHY it keeps happening.
 
 **Traditional Tools**: "Your P&L is -$5,000"
@@ -75,14 +75,14 @@ I don't just track trades. I understand traders.`,
 **EdgeBuddy**: Personalized guidance based on YOUR specific patterns
 
 I'm not a dashboard. I'm a mentor that never sleeps, never judges, and never gives up on you.`,
-    emotion: 'neutral',
+    emotion: "neutral",
     insights: [
-      'Unique: Conversational AI vs static dashboards',
-      'Advantage: Real-time pattern recognition',
+      "Unique: Conversational AI vs static dashboards",
+      "Advantage: Real-time pattern recognition",
     ],
   },
 
-  'Show me my patterns': {
+  "Show me my patterns": {
     content: `Without your data, I'll demonstrate what I typically find:
 
 **🔴 The Revenge Spiral** (Found in 78% of traders)
@@ -98,27 +98,27 @@ Emotional exhaustion peaks, leading to your worst decisions
 Holding losers 3x longer than winners, hoping to "get back to even"
 
 Join the beta and I'll show you YOUR specific patterns within 24 hours.`,
-    emotion: 'warning',
+    emotion: "warning",
     insights: [
-      'Detection: 24-hour pattern analysis',
-      'Accuracy: 94% pattern identification rate',
+      "Detection: 24-hour pattern analysis",
+      "Accuracy: 94% pattern identification rate",
     ],
   },
 };
 
 export default function LiveConversationEnhanced() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [aiMood, setAiMood] = useState<'idle' | 'thinking' | 'responding'>(
-    'idle',
+  const [aiMood, setAiMood] = useState<"idle" | "thinking" | "responding">(
+    "idle",
   );
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const controls = useAnimation();
 
   const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -131,7 +131,7 @@ export default function LiveConversationEnhanced() {
   useEffect(() => {
     // Pulse effect for AI mood indicator
     const interval = setInterval(() => {
-      if (aiMood === 'thinking') {
+      if (aiMood === "thinking") {
         controls.start({
           scale: [1, 1.2, 1],
           transition: { duration: 0.5 },
@@ -146,11 +146,11 @@ export default function LiveConversationEnhanced() {
     text: string,
     callback: (partial: string) => void,
   ) => {
-    const words = text.split(' ');
-    let current = '';
+    const words = text.split(" ");
+    let current = "";
 
     for (let i = 0; i < words.length; i++) {
-      current += (i > 0 ? ' ' : '') + words[i];
+      current += (i > 0 ? " " : "") + words[i];
       callback(current);
       await new Promise((resolve) =>
         setTimeout(resolve, 30 + Math.random() * 50),
@@ -163,15 +163,14 @@ export default function LiveConversationEnhanced() {
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      role: 'user',
+      role: "user",
       content: input,
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    setInput('');
+    setInput("");
     setIsTyping(true);
-    setAiMood('thinking');
-
+    setAiMood("thinking");
 
     // Simulate AI thinking with dynamic delay
     await new Promise((resolve) =>
@@ -184,16 +183,16 @@ export default function LiveConversationEnhanced() {
 The key is discovering YOUR specific patterns. That's where I come in.
 
 I don't just analyze trades. I understand the psychology behind them. Want to see what I can find in your trading data?`,
-      emotion: 'neutral' as const,
+      emotion: "neutral" as const,
     };
 
-    setAiMood('responding');
+    setAiMood("responding");
 
     // Create AI message with typing effect
     const aiMessage: Message = {
       id: (Date.now() + 1).toString(),
-      role: 'ai',
-      content: '',
+      role: "ai",
+      content: "",
       emotion: responseData.emotion,
       insights: responseData.insights,
     };
@@ -208,10 +207,9 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
         updated[updated.length - 1].content = partial;
         return updated;
       });
-
     });
 
-    setAiMood('idle');
+    setAiMood("idle");
   };
 
   const quickQuestions = Object.keys(aiResponses).slice(0, 3);
@@ -229,7 +227,7 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
             <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center">
               <Brain className="w-6 h-6 text-black" />
             </div>
-            {aiMood !== 'idle' && (
+            {aiMood !== "idle" && (
               <motion.div
                 className="absolute inset-0 w-12 h-12 bg-emerald-400 rounded-full"
                 animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
@@ -242,19 +240,19 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
             <div className="flex items-center gap-2 text-sm">
               <div
                 className={`w-2 h-2 rounded-full ${
-                  aiMood === 'idle'
-                    ? 'bg-emerald-500'
-                    : aiMood === 'thinking'
-                      ? 'bg-yellow-500'
-                      : 'bg-blue-500'
+                  aiMood === "idle"
+                    ? "bg-emerald-500"
+                    : aiMood === "thinking"
+                      ? "bg-yellow-500"
+                      : "bg-blue-500"
                 } animate-pulse`}
               />
               <span className="text-gray-400">
-                {aiMood === 'idle'
-                  ? 'Online'
-                  : aiMood === 'thinking'
-                    ? 'Analyzing...'
-                    : 'Responding...'}
+                {aiMood === "idle"
+                  ? "Online"
+                  : aiMood === "thinking"
+                    ? "Analyzing..."
+                    : "Responding..."}
               </span>
             </div>
           </div>
@@ -307,35 +305,35 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] ${message.role === 'user' ? 'order-1' : 'order-2'}`}
+                  className={`max-w-[85%] ${message.role === "user" ? "order-1" : "order-2"}`}
                 >
                   <motion.div
                     className={`px-6 py-4 rounded-2xl ${
-                      message.role === 'user'
-                        ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-black'
-                        : 'glass-dark'
+                      message.role === "user"
+                        ? "bg-gradient-to-br from-emerald-500 to-emerald-600 text-black"
+                        : "glass-dark"
                     }`}
                     whileHover={{ scale: 1.02 }}
                   >
-                    {message.role === 'ai' && message.emotion && (
+                    {message.role === "ai" && message.emotion && (
                       <div
                         className={`flex items-center gap-2 mb-2 text-sm ${
-                          message.emotion === 'warning'
-                            ? 'text-red-400'
-                            : message.emotion === 'concerned'
-                              ? 'text-yellow-400'
-                              : message.emotion === 'encouraging'
-                                ? 'text-emerald-400'
-                                : 'text-gray-400'
+                          message.emotion === "warning"
+                            ? "text-red-400"
+                            : message.emotion === "concerned"
+                              ? "text-yellow-400"
+                              : message.emotion === "encouraging"
+                                ? "text-emerald-400"
+                                : "text-gray-400"
                         }`}
                       >
-                        {message.emotion === 'warning' && (
+                        {message.emotion === "warning" && (
                           <AlertTriangle className="w-4 h-4" />
                         )}
-                        {message.emotion === 'encouraging' && (
+                        {message.emotion === "encouraging" && (
                           <TrendingUp className="w-4 h-4" />
                         )}
                         <span className="capitalize">
@@ -375,7 +373,7 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
                     )}
                   </motion.div>
 
-                  {message.role === 'ai' && (
+                  {message.role === "ai" && (
                     <motion.div
                       className="flex items-center gap-2 mt-2 text-xs text-gray-500"
                       initial={{ opacity: 0 }}
@@ -426,7 +424,7 @@ I don't just analyze trades. I understand the psychology behind them. Want to se
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+            onKeyPress={(e) => e.key === "Enter" && handleSend()}
             placeholder="Ask about your trading patterns..."
             className="w-full glass-dark border border-gray-700 rounded-2xl px-6 py-4 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-all"
           />
